@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background-image: url();
+    background-image: url(/Login/images/3.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -21,8 +21,17 @@ body {
     text-align: center;
 }
 
+.register-banner {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 5px;
+  object-fit: cover;
+  text-align: center;
+}
+
 header {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size: 30px;
     color: #f17b37;
     font-family: 'Hack Mara Pop', cursive;
