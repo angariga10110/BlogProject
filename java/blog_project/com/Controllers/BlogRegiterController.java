@@ -1,4 +1,4 @@
-package blog_project.com.Controllers;
+package blog_project.com.controllers;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import blog_project.com.models.entity.Account;
 import blog_project.com.services.BlogService;
@@ -43,8 +44,10 @@ public class BlogRegiterController {
 
 	// 商品の登録処理
 	@PostMapping("/blog/register/process")
-	public String BlogregisterProcess(@RequestParam String accountName, @RequestParam String accountEmail,
-			@RequestParam String password) {
+	public String blogRegisterProcess(@RequestParam String blogTitle, 
+			@RequestParam String categoryName,
+			@RequestParam MultipartFile blogImage,
+			@RequestParam String article) {
 		// セッションからログインしている人の情報をadminという変数に格納
 		Account account = (Account) session.getAttribute("loginAccountInfo");
 		// もし、account==nullログイン画面にリダイレクトする
@@ -61,8 +64,8 @@ public class BlogRegiterController {
 					+blogImage.getOriginalFilename();
 			// ファイルの保存
 			try {
-				Files.copy(blogImage.getInputStream(), Path.of("src/main/resources/static/blog-img/" + fileName));
-			}
+				Files.copy(blogImage.getInputStream(), Path.of("src/main/resources/static/blog-image/" + fileName));
+			
 		}
 	}
 

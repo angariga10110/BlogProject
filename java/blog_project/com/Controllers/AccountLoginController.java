@@ -1,4 +1,4 @@
-package blog_project.com.Controllers;
+package blog_project.com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
