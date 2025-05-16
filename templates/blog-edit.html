@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ブログ編集</title>
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/earlyaccess/hachimaru.css" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/blog-edit.css}" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<header>
+			<h1 th:text="'ようこそ、' + ${accountName} + ' さん！'"></h1>
+			<nav>
+				<a th:href="@{/home}">Home</a>
+				<a th:href="@{/blog/register}">Blog Register</a>
+				<a th:href="@{/logout}">Logout</a>
+			</nav>
+		</header>
+
+		<main class="form-container">
+			<h2>商品編集</h2>
+
+
+			<form th:action="@{/blog/edit/process}" th:object="${blog}" method="post" enctype="multipart/form-data">
+				<input type="hidden" th:field="*{blogId}" />
+
+				<div class="label">
+					<label for="blogTitle">タイトル</label>
+					<input type="text" id="blogTitle" th:field="*{blogTitle}" required />
+
+					<label for="categoryName">カテゴリ</label>
+					<input type="text" id="categoryName" th:field="*{categoryName}" />
+				</div>
+
+				<div class="upload-wrapper">
+
+					<img th:if="${blog.blogImage}" th:src="@{|/blog-image/${blog.blogImage}|}" alt="" class="preview" />
+					<label for="blogImage" class="custom-upload-btn">新しい画像を選択</label>
+					<span id="fileName" class="file">ファイルが選択されていません</span>
+					<input type="file" id="blogImage" th:field="*{blogImage}" accept="image/*" style="display:none" />
+				</div>
+
+				<label for="article">詳細</label>
+				<textarea id="article" th:field="*{article}" rows="5" required></textarea>
+
+				<div class="btn">
+					<button type="submit" class="submit-btn">更新</button>
+					<button type="button" class="back-btn" onclick="history.back()">戻る</button>
+					<button type="button" class="delete-btn"
+						onclick="if(confirm('本当に削除しますか？')) document.getElementById('deleteForm').submit();">
+						削除
+					</button>
+				</div>
+			</form>
+
+			<form id="deleteForm" th:action="@{/blog/delete}" method="post">
+				<input type="hidden" name="blogId" th:value="${blog.blogId}" />
+				<input type="hidden" th:field="*{blogId}" />
+			</form>
+		</main>
+	</div>
+
+	<script>
+		const fileInput = document.getElementById('blogImage');
+		const fileNameSpan = document.getElementById('fileName');
+		const previewImg = document.querySelector('.preview');
+		// ファイル選択時の処理
+		fileInput.addEventListener('change', () => {
+			const file = fileInput.files[0];
+			fileNameSpan.textContent = file ? file.name : 'ファイルが選択されていません';
+			// プレビュー画像を更新
+			if (file && previewImg) {
+				previewImg.src = URL.createObjectURL(file);
+			}
+		});
+	</script>
+</body>
+
+</html>

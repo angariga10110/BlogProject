@@ -29,27 +29,55 @@ public class BlogService {
 	// 保存処理
 	// そうでない場合、
 	// false
-	public boolean createBlog(String blogTitle,String categoryName,String blogImage,
-			String article,Long accountId) {
-		if(blogDao.findByCategoryName(categoryName)==null) {
-		   blogDao.save(new Blog(blogTitle,categoryName,blogImage,article,accountId));
-		   return true;
-		}else {
+	public boolean createBlog(String blogTitle, String categoryName, String blogImage, String article, Long accountId) {
+		if (blogDao.findByCategoryName(categoryName) == null) {
+			blogDao.save(new Blog(blogTitle, categoryName, blogImage, article, accountId));
+			return true;
+		} else {
 			return false;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+	// 編集画面を表示する時のチェック
+	// もし、blogId == null
+	// そうではない場合
+	// findByBlogIdの情報をコントローラークラスに渡す
+	public Blog blogEditcheck(Long blogId) {
+		if (blogId == null) {
+			return null;
+		} else {
+			return blogDao.findByBlogId(blogId);
+		}
+	}
+
+	// 更新処理のチェック
+	// blogId==null , 更新処理しない
+	// コントローラークラスからもらったらblogIdを使って、編集する前のデータを取得
+	// 変更するべきどころだけ、セッターを使用してデータを更新する
+	public boolean updateBlog(Long blogId, String blogTitle, String categoryName, String blogImage, String article,
+			Long accountId) {
+		if (blogId == null) {
+			return false;
+		} else {
+			Blog blog = blogDao.findByBlogId(blogId);
+			blog.setBlogTitle(blogTitle);
+			blog.setCategoryName(categoryName);
+			blog.setBlogImage(blogImage);
+			blog.setArticle(article);
+			blog.setBlogId(blogId);
+			blogDao.save(blog);
+
+			return true;
+		}
+	}
+
+	// 削除処理のチェック
+	public boolean deleteBlog(Long blogId) {
+		if (blogId == null) {
+			return false;
+		} else {
+			blogDao.deleteByBlogId(blogId);
+			return true;
+		}
+	}
 }
