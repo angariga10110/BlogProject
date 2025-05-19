@@ -16,18 +16,19 @@ public interface BlogDao extends JpaRepository<Blog, Long> {
 	Blog save(Blog blog);
 
 	// SELECT * FROM blog
-	// 用途;商品の一覧を表示させるときに使用
+	// 用途 一覧を表示させるときに使用
 	List<Blog> findAll();
 
-	// SELECT * FROM blog WHERE blog_name = ?
-	// 用途;商品の登録チックに使用 同じ商品登録されないようにするチックに使用
+	// カテゴリ名で検索（重複チェック用）
 	Blog findByCategoryName(String categoryName);
+	// カテゴリ名の存在確認（重複チェック用）
+	boolean existsByCategoryName(String categoryName);
 
 	// SELECT * FROM blog WHERE blog_id = ?
-	// 用途;編集画面を表示する際に使用。
+	// 用途;ブログIDで取得（編集画面表示用）
 	Blog findByBlogId(Long blogId);
 
 	// DLETE FROM blog WHERE blog_id = ?
-	// 用途;削除使用します。
+	// 用途;ブログIDで削除（削除処理用）
 	void deleteByBlogId(Long blogId);
 }

@@ -8,6 +8,7 @@ import blog_project.com.models.entity.Account;
 
 @Service
 public class AccountService {
+
 	@Autowired
 	private AccountDao accountDao;
 
@@ -16,7 +17,6 @@ public class AccountService {
 	// saveメソッドを使用して登録処理をする
 	// 保存ができたらtrue
 	// そうでない場合、保存処理失敗 false
-
 	public boolean createAccount(String accountName, String accountEmail, String password) {
 		if (accountDao.findByAccountEmail(accountEmail) == null) {
 			accountDao.save(new Account(accountName, accountEmail, password));

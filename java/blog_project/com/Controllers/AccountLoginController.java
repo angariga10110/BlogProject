@@ -2,6 +2,7 @@ package blog_project.com.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,9 +13,9 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AccountLoginController {
+	
 	@Autowired
 	private AccountService accountService;
-
 	// Sessionが使えるように宣言
 	@Autowired
 	private HttpSession session;
@@ -27,7 +28,7 @@ public class AccountLoginController {
 
 	// ログイン処理をする
 	@PostMapping("/account/login/process")
-	public String accountLoginProcess(@RequestParam String accountEmail, @RequestParam String password) {
+	public String accountLoginProcess(@RequestParam String accountEmail, @RequestParam String password, Model model) {
 		// loginCheckメソッドを呼び出してそのけっかをaccountという変数に格納
 		Account account = accountService.loginCheck(accountEmail, password);
 		// もし、account=nullログイン画面とどまります

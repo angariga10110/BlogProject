@@ -3,10 +3,12 @@ package blog_project.com.controllers;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +25,13 @@ public class BlogRegisterController {
 
 	@Autowired
 	private BlogService blogService;
-
 	@Autowired
 	private HttpSession session;
+	// アップロード先ディレクトリを取得
+	@Value("${file.upload-dir}")
+	private String uploadDir;
 
-	/**
-	 * 新規投稿画面の表示メソッド
-	 */
+	
 	@GetMapping("/blog/register")
 	public String showRegisterForm(Model model) {
 		// セッションからログイン中ユーザー情報を取得
@@ -45,7 +47,6 @@ public class BlogRegisterController {
 	}
 
 	// 投稿処理を実行するメソッド
-
 	@PostMapping("/blog/register/process")
 	public String processRegister(@RequestParam("blogTitle") String blogTitle,
 			@RequestParam("categoryName") String categoryName, @RequestParam("blogImage") MultipartFile blogImage,
@@ -63,8 +64,11 @@ public class BlogRegisterController {
 
 		try {
 			// static/blog-image 以下にファイルを保存
-			Path destPath = Paths.get("src/main/resources/static/blog-image/" + fileName);
-			Files.copy(blogImage.getInputStream(), destPath);
+			Path target = Path.of(uploadDir, fileName);
+			Files.createDirectories(target.getParent());
+			Files.copy(blogImage.getInputStream(),
+			           target,
+			           StandardCopyOption.REPLACE_EXISTING);
 
 			// サービス層で DB 登録
 			boolean success = blogService.createBlog(blogTitle, categoryName, fileName, article,

@@ -3,10 +3,12 @@ package blog_project.com.controllers;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +25,17 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class BlogEditController {
 
+	// ブログ操作用サービスを注入
 	@Autowired
 	private BlogService blogService;
-
+	// セッションからログイン情報を取得
 	@Autowired
 	private HttpSession session;
+	// アップロード先ディレクトリを取得
+	@Value("${file.upload-dir}")
+	private String uploadDir;
 
 	// 編集編集画面を表示する
-
 	@GetMapping("/blog/edit/{blogId}")
 	public String showEditForm(@PathVariable("blogId") Long blogId, Model model) {
 		// セッションからログインしているユーザー情報を取得
@@ -52,34 +57,43 @@ public class BlogEditController {
 				model.addAttribute("blog", blog);
 				return "blog-edit";
 			}
-
 		}
 	}
 
 	// 更新処理する
 	@PostMapping("/blog/edit/process")
 	public String processEdit(@RequestParam String blogTitle, @RequestParam String categoryName,
-			@RequestParam MultipartFile blogImage, @RequestParam String article, @RequestParam Long blogId) {
+			@RequestParam MultipartFile blogImage, @RequestParam String article, @RequestParam Long blogId)
+					throws IOException {
 		// セッションからログインしている人の情報をadminという変数に格納
 		Account account = (Account) session.getAttribute("loginAccountInfo");
 		if (account == null) {
 			return "redirect:/login";
 		} else {
-			String fileName = new SimpleDateFormat("yyy-MM-dd-HH-mm-ss-").format(new Date())
-					+ blogImage.getOriginalFilename();
-
-			try {
-				Files.copy(blogImage.getInputStream(), Path.of("src/main/resources/static/blog-image/" + fileName));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			       // 既存データ取得
+			       Blog blog = blogService.findById(blogId);
+			
+			    // タイトル／カテゴリ／本文を更新
+			       blog.setBlogTitle(blogTitle);
+			blog.setCategoryName(categoryName);
+			blog.setArticle(article);
+			
+			// 画像が選択されていればアップロード
+			if (!blogImage.isEmpty()) {
+			String timestamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new Date());
+			String fileName = timestamp + blogImage.getOriginalFilename();
+			Path target = Path.of(uploadDir, fileName);
+			// ディレクトリ作成
+			Files.createDirectories(target.getParent());  
+			Files.copy(blogImage.getInputStream(),
+			target,
+			StandardCopyOption.REPLACE_EXISTING);
+			// 画像パスをセット
+			blog.setBlogImage(fileName);
 			}
-			if (blogService.updateBlog(blogId, blogTitle, categoryName, article, fileName, account.getAccountId())) {
-				return "redirect:/home";
-			} else {
-				return "redirect:/blog-edit" + blogId;
-			}
-		}
-
-	}
+			// データ保存
+			blogService.save(blog);
+			return "redirect:/home";			   
+    } 
+  }
 }

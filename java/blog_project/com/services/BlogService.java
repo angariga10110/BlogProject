@@ -10,8 +10,18 @@ import blog_project.com.models.entity.Blog;
 
 @Service
 public class BlogService {
+	
 	@Autowired
 	BlogDao blogDao;
+	
+	//IDでブログを取得。存在しなければ例外を投げる
+	public Blog findById(Long blogId) {
+		return blogDao.findById(blogId).orElseThrow(() -> new RuntimeException("指定のブログが見つかりません: " + blogId));
+	}
+	//ブログを保存
+	public Blog save(Blog blog) {
+		return blogDao.save(blog);
+	}
 
 	// 商品一覧のチック
 	// もし、accountId == null 戻り値としてnull
@@ -30,9 +40,9 @@ public class BlogService {
 	// そうでない場合、
 	// false
 	public boolean createBlog(String blogTitle, String categoryName, String blogImage, String article, Long accountId) {
-		if (blogDao.findByCategoryName(categoryName) == null) {
-			blogDao.save(new Blog(blogTitle, categoryName, blogImage, article, accountId));
-			return true;
+		if (!blogDao.existsByCategoryName(categoryName)) {
+            blogDao.save(new Blog(blogTitle, categoryName, blogImage, article, accountId));
+            return true;
 		} else {
 			return false;
 		}
@@ -64,7 +74,6 @@ public class BlogService {
 			blog.setCategoryName(categoryName);
 			blog.setBlogImage(blogImage);
 			blog.setArticle(article);
-			blog.setBlogId(blogId);
 			blogDao.save(blog);
 
 			return true;

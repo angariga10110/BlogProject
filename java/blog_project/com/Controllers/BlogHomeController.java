@@ -17,12 +17,10 @@ public class BlogHomeController {
 
 	@Autowired
 	private HttpSession session;
-
 	@Autowired
 	private BlogService blogService;
 
 	// ホーム画面を表示するメソッド
-
 	@GetMapping("/home")
 	public String getHomePage(Model model) {
 		// セッションからログイン中ユーザー情報を取得

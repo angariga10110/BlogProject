@@ -85,10 +85,4 @@ public class Blog {
 		this.accountId = accountId;
 	}
 	
-	
-	
-	
-	
-	
-
 }
