@@ -31,4 +31,7 @@ public interface BlogDao extends JpaRepository<Blog, Long> {
 	// DLETE FROM blog WHERE blog_id = ?
 	// 用途;ブログIDで削除（削除処理用）
 	void deleteByBlogId(Long blogId);
+	
+	//ブログタイトルを部分一致検索（大文字小文字を無視）
+	List<Blog> findByBlogTitleContainingIgnoreCase(String blogTitle);
 }

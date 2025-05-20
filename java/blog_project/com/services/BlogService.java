@@ -89,4 +89,14 @@ public class BlogService {
 			return true;
 		}
 	}
+	
+	//タイトルキーワードでブログを検索：空キーワードなら全件取得、そうでなければ部分一致検索
+	public List<Blog> searchByTitle(String keyword) {
+	    if (keyword == null || keyword.isBlank()) {
+	        // キーワードが空または null の場合は全件返却
+	        return blogDao.findAll();
+	    }
+	    //部分一致検索メソッドを呼び出し
+	    return blogDao.findByBlogTitleContainingIgnoreCase(keyword);
+	}
 }

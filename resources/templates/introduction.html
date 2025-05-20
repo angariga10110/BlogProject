@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/introduction.css}" />
+	<title>Document</title>
+
+</head>
+
+<body>
+
+	<header class="site-header">
+		<a th:href="@{/home}" class="home-link">Home</a>
+	</header>
+
+	<div class="page-container">
+
+		<section id="cards" class="cards-page">
+			<div class="cards-header">
+				<h1 class="logo-text">ANGA RIGA</h1>
+			</div>
+			<div class="cards-container">
+				<a href="#page1" class="card">
+					<img th:src="@{/images/4.jpg}" alt="Hometown" />
+					<h3>Hometown</h3>
+				</a>
+				<a href="#page2" class="card">
+					<img th:src="@{/images/12.jpg}" alt="Art" />
+					<h3>Art</h3>
+				</a>
+				<a href="#page3" class="card">
+					<img th:src="@{/images/22.jpg}" alt="About Me" />
+					<h3>About Me</h3>
+				</a>
+				<a href="#page4" class="card">
+					<img th:src="@{/images/5.jpg}" alt="Education" />
+					<h3>Education</h3>
+				</a>
+				<a href="#page5" class="card">
+					<img th:src="@{/images/32.jpg}" alt="Contact" />
+					<h3>Contact</h3>
+				</a>
+			</div>
+			<div class="cards-footer">
+				<img src="img/logo.png" alt="Logo" class="cards-logo" />
+			</div>
+		</section>
+
+
+		<section id="page1" class="detail-page">
+			<h1>Hometown</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/gerru.jpg}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4>作品标题</h4>
+					<p>这里写一些描述文字，比如创作时间、用到的材料、灵感来源等。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page2" class="detail-page">
+			<h1>Art</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/ART.png}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4></h4>
+					<p></p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page3" class="detail-page">
+			<h1>About Me</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/Me.png}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4></h4>
+					<p></p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page4" class="detail-page">
+			<h1>Education</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/1.jpg}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4></h4>
+					<p></p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page5" class="detail-page">
+			<h1>Contact</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/1.jpg}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4>作品标题</h4>
+					<p>这里写一些描述文字，比如创作时间、用到的材料、灵感来源等。</p>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<button id="backToTop">↑</button>
+	<nav class="side-nav">
+		<ul>
+			<li><a href="#cards" class="nav-dot active"></a></li>
+			<li><a href="#page1" class="nav-dot"></a></li>
+			<li><a href="#page2" class="nav-dot"></a></li>
+			<li><a href="#page3" class="nav-dot"></a></li>
+			<li><a href="#page4" class="nav-dot"></a></li>
+			<li><a href="#page5" class="nav-dot"></a></li>
+		</ul>
+	</nav>
+	<script th:src="@{/js/introduction.js}"></script>
+
+</body>
+
+</html>
