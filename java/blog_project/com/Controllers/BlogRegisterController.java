@@ -2,7 +2,6 @@ package blog_project.com.controllers;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,16 +49,23 @@ public class BlogRegisterController {
 	@PostMapping("/blog/register/process")
 	public String processRegister(@RequestParam("blogTitle") String blogTitle,
 			@RequestParam("categoryName") String categoryName, @RequestParam("blogImage") MultipartFile blogImage,
-			@RequestParam("article") String article) {
+			@RequestParam("article") String article,Model model) {
 		// セッションからログイン中ユーザー情報を取得
 		Account account = (Account) session.getAttribute("loginAccountInfo");
 		if (account == null) {
 			// 未ログインならログイン画面へリダイレクト
 			return "redirect:/login";
 		}
+		
+		model.addAttribute("accountName", account.getAccountName());
+		if (blogImage.isEmpty()) {
+            model.addAttribute("errorMsg", "请选择要上传的图片");
+            return "blog-register";
+        }
 
 		// 画像ファイル名にタイムスタンプを付与
 		String timestamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
+		String original = Path.of(blogImage.getOriginalFilename()).getFileName().toString();
 		String fileName = timestamp + "-" + blogImage.getOriginalFilename();
 
 		try {
@@ -77,12 +83,14 @@ public class BlogRegisterController {
 				// 登録成功ならホーム画面へリダイレクト
 				return "redirect:/home";
 			} else {
+				model.addAttribute("errorMsg", "保存到数据库失败，请稍后重试");
 				// 登録失敗なら再び登録画面へ
 				return "blog-register";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			// エラー発生時は登録画面に戻す
+			model.addAttribute("errorMsg", "文件上传或保存时发生异常");
 			return "blog-register";
 		}
 	}

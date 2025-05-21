@@ -39,13 +39,10 @@ public class BlogService {
 	// 保存処理
 	// そうでない場合、
 	// false
-	public boolean createBlog(String blogTitle, String categoryName, String blogImage, String article, Long accountId) {
-		if (!blogDao.existsByCategoryName(categoryName)) {
+	public boolean createBlog(String blogTitle, String categoryName, String blogImage, String article, Long accountId) {		
             blogDao.save(new Blog(blogTitle, categoryName, blogImage, article, accountId));
             return true;
-		} else {
-			return false;
-		}
+		
 	}
 
 	// 編集画面を表示する時のチェック
@@ -100,3 +97,4 @@ public class BlogService {
 	    return blogDao.findByBlogTitleContainingIgnoreCase(keyword);
 	}
 }
+

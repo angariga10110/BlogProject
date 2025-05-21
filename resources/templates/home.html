@@ -34,7 +34,6 @@
 			<div class="list">
 				<div class="card" th:each="blog : ${blogList}">
 					<a th:href="@{|/blog/edit/${blog.blogId}|}">
-
 						<img th:src="@{|/blog-image/${blog.blogImage}|}" alt="blog-image" />
 					</a>
 					<h3 th:text="${blog.blogTitle}"></h3>

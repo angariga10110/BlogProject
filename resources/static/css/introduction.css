@@ -39,7 +39,6 @@
 /*―― Hover 效果 ――*/
 .site-header .home-link:hover {
 	background: rgba(255, 255, 255, 0.4);
-	/* 40% 透明度 */
 	color: #000;
 }
 
@@ -160,7 +159,7 @@ body {
 .logo-text {
 	font-family: 'Orbitron', sans-serif;
 
-	font-size: 3.5rem;
+	font-size: 4.5rem;
 
 	text-transform: uppercase;
 
@@ -224,8 +223,8 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: 200px;
-	height: 200px;
+	width: 270px;
+	height: 270px;
 	transform-origin: bottom center;
 	/* 各カードで上書きする変数 ↓*/
 	--rot: 0deg;
@@ -453,4 +452,12 @@ body {
 
 #backToTop.show {
 	display: flex;
+}
+
+.cards-logo {
+  display: block;
+  width: 100px;
+  height: auto;
+  margin: 0 auto;
+  transform-origin: center;
 }

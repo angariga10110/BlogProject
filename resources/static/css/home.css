@@ -32,11 +32,11 @@ header h1 {
 
 header nav {
   position: absolute;
-  top: 50%;                     /* 垂直居中 */
-  right: 24px;                  /* 整个 nav 离右侧 24px */
+  top: 50%;                    
+  right: 24px;                 
   transform: translateY(-50%);
-  display: flex;                /* 子项水平排列 */
-  gap: 1rem;                    /* 链接之间空隙 */
+  display: flex;             
+  gap: 1rem;          
 }
 
 nav a {
