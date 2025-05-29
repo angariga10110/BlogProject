@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/introduction.css}" />
+	<title>Document</title>
+
+</head>
+
+<body>
+
+	<header class="site-header">
+		<!-- 如果没登录，跳到登录页 -->
+		<a th:if="${session.loginAccountInfo == null}" th:href="@{/login}" class="home-link">Home</a>
+
+		<!-- 登录了且是管理员 -->
+		<a th:if="${session.loginAccountInfo != null and session.loginAccountInfo.role == 'ADMIN'}" th:href="@{/home}"
+			class="home-link">Home</a>
+
+		<!-- 登录了且是普通用户 -->
+		<a th:if="${session.loginAccountInfo != null and session.loginAccountInfo.role == 'USER'}"
+			th:href="@{/dashboard}" class="home-link">Home</a>
+	</header>
+
+	<div class="page-container">
+
+		<section id="cards" class="cards-page">
+			<div class="cards-header">
+				<h1 class="logo-text">ANGA RIGA</h1>
+			</div>
+			<div class="cards-container">
+				<a href="#page1" class="card">
+					<img th:src="@{/images/D.jfif}" alt="Hometown" />
+					<h3>Hometown</h3>
+				</a>
+				<a href="#page2" class="card">
+					<img th:src="@{/images/C.jfif}" alt="Art" />
+					<h3>Art</h3>
+				</a>
+				<a href="#page3" class="card">
+					<img th:src="@{/images/22.jpg}" alt="About Me" />
+					<h3>About Me</h3>
+				</a>
+				<a href="#page4" class="card">
+					<img th:src="@{/images/A.jfif}" alt="Education" />
+					<h3>Education</h3>
+				</a>
+				<a href="#page5" class="card">
+					<img th:src="@{/images/C.jfif}" alt="Contact" />
+					<h3>Contact</h3>
+				</a>
+			</div>
+			<div class="cards-footer">
+				<img th:src="@{/images/logo.png}" alt="Logo" class="cards-logo" />
+			</div>
+		</section>
+
+
+		<section id="page1" class="detail-page">
+			<h1>Hometown</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/cao.jfif}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4>故郷</h4>
+					<p>広大な錫林郭勒草原は、のびやかに広がる草原と果てしない青空が心を解き放ち、原風景として深く刻まれています。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page2" class="detail-page">
+			<h1>Art</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/111.jfif}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4>高校時代から絵画に親しみ、油彩や水彩など多彩な技法を学び、ウェブデザインのスキルも磨いてきました</h4>
+					<p></p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page3" class="detail-page">
+			<h1>About Me</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/222.jfif}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4>個人情報</h4>
+					<p>私は常に新しい技術を学び続け、自身の能力を磨きながら、未知のスキルへの強い好奇心を持っています</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page4" class="detail-page">
+			<h1>Education</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/B.jfif}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4>専攻分野</h4>
+					<p>大学では美術を専攻し、彫刻や翻訳、壁画、平面デザイン、プロダクトデザインなども手掛けました</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="page5" class="detail-page">
+			<h1>Contact</h1>
+			<p>……</p>
+			<div class="info-card">
+				<img th:src="@{/images/C.jfif}" alt="Art Sample">
+				<div class="info-card-content">
+					<h4>ご要望がありましたらお気軽にお問い合わせください</h4>
+					<p></p>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<button id="backToTop">↑</button>
+	<nav class="side-nav">
+		<ul>
+			<li><a href="#cards" class="nav-dot active"></a></li>
+			<li><a href="#page1" class="nav-dot"></a></li>
+			<li><a href="#page2" class="nav-dot"></a></li>
+			<li><a href="#page3" class="nav-dot"></a></li>
+			<li><a href="#page4" class="nav-dot"></a></li>
+			<li><a href="#page5" class="nav-dot"></a></li>
+		</ul>
+	</nav>
+	<script th:src="@{/js/introduction.js}"></script>
+
+</body>
+
+</html>

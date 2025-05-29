@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ユーザー ホーム</title>
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<!-- ========== Header: About Me & Logout ========== -->
+		<header>
+			<h1>ようこそ、<span th:text="${account.accountName}">User</span> さん</h1>
+			<form th:action="@{/search}" method="get" class="search-form">
+				<input type="text" name="q" placeholder="人物検索…" th:value="${q}" />
+				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+			</form>
+			<nav>
+				<a th:href="@{/document}">About Me</a>
+				<a th:href="@{/logout}">Logout</a>
+			</nav>
+		</header>
+
+		<main>
+			<h2>Blog List</h2>
+			<hr>
+			<div class="list">
+				<div class="card" th:each="blog : ${blogList}">
+						<img th:src="@{|/blog-image/${blog.blogImage}|}" alt="blog-image" />
+					<h3 th:text="${blog.blogTitle}"></h3>
+					<p th:text="${blog.categoryName}"></p>
+					<p th:text="${blog.article}"></p>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<p>© 2025 YourAppName. All Rights Reserved.</p>
+		</footer>
+
+	</div>
+
+	<!-- 如果有特定交互，可复用 home.js 或自定义 JS -->
+	<script th:src="@{/js/home.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	background-image: url(/images/3.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register_box {
+	background-color: cornsilk;
+	padding: 20px;
+	border-radius: 15px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	width: 380px;
+	text-align: center;
+}
+
+.register-banner {
+	width: 100%;
+	height: auto;
+	border-radius: 10px 10px 0 0;
+	margin-bottom: 10px;
+	object-fit: cover;
+	text-align: center;
+}
+
+header {
+	margin-bottom: 5px;
+	font-size: 30px;
+	color: #f17b37;
+	font-family: 'Hack Mara Pop', cursive;
+}
+
+/* 角色选择区域，左右并列 */
+.role-selection {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem;
+}
+
+/* 每个选项：隐藏原生 radio，点击 label 即可选中 */
+.role-option input[type="radio"] {
+  display: none;
+}
+
+/* 图片和文字居中 */
+.role-option img {
+  width: 80px;
+  height: 80px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.role-option span {
+  display: block;
+  text-align: center;
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* 选中状态高亮 */
+.role-option input[type="radio"]:checked + img {
+  border-color: #f17b37;
+}
+.role-option input[type="radio"]:checked + img + span {
+  font-weight: bold;
+  color: #f17b37;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	width: 70%;
+	padding: 8px;
+	margin-top: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 16px;
+	font-family: 'Hack Mara Pop', cursive;
+	text-align: center;
+}
+
+.btn {
+  display: flex;             /* フレックスで配置 */
+  flex-direction: column;    /* 上下に並べる */
+  align-items: center;       /* 中央揃え */
+  gap: 8px;                 /* ボタン間の余白 */
+  margin-top: 8px;
+}
+
+button[type="submit"] {
+	width: 40%;
+	padding: 8px 0;
+	background-color: #f17b37;
+	color: white;
+	font-size: 16px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+.back-btn {
+  display: inline-block;     /* 幅を内容に合わせる */
+  padding: 3px 16px;         /* 余白を小さめに調整 */
+  background-color: rgb(251, 185, 132); /* グレー系の背景 */
+  color: #9d2727;            /* ダークグレーの文字色 */
+  font-size: 14px;           /* 少し小さめの文字サイズ */
+  border-radius: 6px;        /* 角丸6px */
+  text-decoration: none;     /* アンカータグの下線を消す */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.back-btn:hover {
+  background-color: rgb(255, 128, 64); /* ホバー時は濃いグレーに */
+}

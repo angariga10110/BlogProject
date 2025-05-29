@@ -1,0 +1,79 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	background-image: url("/images/1.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+
+}
+
+.login_box {
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 40px;
+	border-radius: 15px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	width: 300px;
+	text-align: center;
+
+}
+
+header {
+	margin-bottom: 20px;
+	font-size: 30px;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+	color: #333;
+}
+
+.error-message {
+  color: #c00;                    /* テキストを深い赤に */
+  background-color: #fee;         /* 薄い赤の背景で目立たせる */
+  padding: 0.5em 1em;             /* 上下 0.5em、左右 1em の余白 */
+  margin-bottom: 1em;             /* 下に余白を入れてフォームと分離 */
+  border: 1px solid #c00;         /* 赤の枠線で囲む */
+  border-radius: 4px;             /* 角を少し丸める */
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 0.9rem;              /* 若干小さめの文字サイズ */
+  line-height: 1.4;               /* 読みやすい行間 */
+}
+
+input[type="email"],
+input[type="password"] {
+	width: 90%;
+	padding: 10px;
+	margin-top: 8px;
+	margin-bottom: 25px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 16px;
+	font-family: 'Nunito', sans-serif;
+	text-align: center;
+}
+
+button[type="submit"] {
+	width: 70%;
+	padding: 10px;
+	background-color: #f17b37;
+	color: white;
+	font-size: 16px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+a {
+	display: inline-block;
+	margin-top: 15px;
+	text-decoration: none;
+	font-weight: bold;
+}
